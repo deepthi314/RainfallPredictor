@@ -1,0 +1,27 @@
+# Data files
+data/raw/
+data/processed/
+
+# Models and Pickles
+models/*.pkl
+
+# Outputs and Figures
+outputs/figures/
+outputs/reports/
+
+# Python environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Notebooks
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
