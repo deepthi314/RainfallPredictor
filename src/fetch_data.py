@@ -1,6 +1,9 @@
 import requests
 import os
 
+# Base directory: project root (one level up from src/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def fetch_data():
     url = "https://power.larc.nasa.gov/api/temporal/daily/point"
     params = {
@@ -13,7 +16,7 @@ def fetch_data():
         "format": "CSV"
     }
     
-    target_path = r"e:\college\WaterHarvesting\rainfall_prediction\data\raw\Manila.csv"
+    target_path = os.path.join(BASE_DIR, "data", "raw", "Manila.csv")
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
     
     print(f"Fetching data to {target_path}...")

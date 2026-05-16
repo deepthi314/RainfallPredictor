@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 import os
 
+# Base directory: project root (one level up from src/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def perform_pca_analysis(X_scaled, target_variance=0.85):
     """
     Perform PCA on the feature set and generate diagnostic plots.
@@ -36,7 +39,7 @@ def perform_pca_analysis(X_scaled, target_variance=0.85):
     plt.title('Scree Plot & Cumulative Explained Variance')
     plt.legend(loc='best')
     plt.grid(True)
-    fig_dir = r"e:\college\WaterHarvesting\rainfall_prediction\outputs\figures"
+    fig_dir = os.path.join(BASE_DIR, "outputs", "figures")
     os.makedirs(fig_dir, exist_ok=True)
     plt.savefig(os.path.join(fig_dir, "pca_scree_plot.png"), dpi=300)
     plt.close()
@@ -56,13 +59,13 @@ def perform_pca_analysis(X_scaled, target_variance=0.85):
     plt.ylabel('PC2')
     plt.title('PCA Biplot (Feature Loadings)')
     plt.grid(True)
-    plt.savefig(r"e:\college\WaterHarvesting\rainfall_prediction\outputs\figures\pca_biplot.png", dpi=300)
+    plt.savefig(os.path.join(BASE_DIR, "outputs", "figures", "pca_biplot.png"), dpi=300)
     plt.close()
     
     return n_components_optimal
 
 if __name__ == "__main__":
-    feat_file = r"e:\college\WaterHarvesting\rainfall_prediction\data\processed\feature_engineered_data.csv"
+    feat_file = os.path.join(BASE_DIR, "data", "processed", "feature_engineered_data.csv")
     if os.path.exists(feat_file):
         df = pd.read_csv(feat_file)
         # Drop columns not used in PCA

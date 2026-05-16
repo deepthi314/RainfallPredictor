@@ -11,8 +11,9 @@ st.set_page_config(page_title="Manila Rainfall Predictor", layout="wide")
 # Cache Models
 @st.cache_resource
 def load_models():
-    model = joblib.load(r"e:\college\WaterHarvesting\rainfall_prediction\models\best_model.pkl")
-    scaler = joblib.load(r"e:\college\WaterHarvesting\rainfall_prediction\models\scaler.pkl")
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model = joblib.load(os.path.join(base_dir, "models", "best_model.pkl"))
+    scaler = joblib.load(os.path.join(base_dir, "models", "scaler.pkl"))
     return model, scaler
 
 try:

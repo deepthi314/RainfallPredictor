@@ -6,6 +6,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from data_loader import load_manila_data, save_processed_data
 
+# Base directory: project root (one level up from src/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def preprocess_data(file_path):
     """
     Clean, impute, and scale the Manila rainfall dataset.
@@ -61,14 +64,14 @@ def preprocess_data(file_path):
 
 if __name__ == "__main__":
     # Test loading
-    input_file = r"e:\college\WaterHarvesting\rainfall_prediction\data\raw\Manila.csv"
-    output_file = r"e:\college\WaterHarvesting\rainfall_prediction\data\processed\cleaned_data.csv"
+    input_file = os.path.join(BASE_DIR, "data", "raw", "Manila.csv")
+    output_file = os.path.join(BASE_DIR, "data", "processed", "cleaned_data.csv")
     
     if os.path.exists(input_file):
         df_cleaned, scaler = preprocess_data(input_file)
         save_processed_data(df_cleaned, output_file)
         import joblib
-        models_dir = r"e:\college\WaterHarvesting\rainfall_prediction\models"
+        models_dir = os.path.join(BASE_DIR, "models")
         os.makedirs(models_dir, exist_ok=True)
         joblib.dump(scaler, os.path.join(models_dir, "scaler.pkl"))
         print("Preprocessing successfully finished.")

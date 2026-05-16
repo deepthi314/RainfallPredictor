@@ -5,6 +5,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from data_loader import save_processed_data
 
+# Base directory: project root (one level up from src/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def engineer_features(df):
     """
     Extract date features, lags, and rolling means.
@@ -53,8 +56,8 @@ def engineer_features(df):
     return df
 
 if __name__ == "__main__":
-    cleaned_file = r"e:\college\WaterHarvesting\rainfall_prediction\data\processed\cleaned_data.csv"
-    output_file = r"e:\college\WaterHarvesting\rainfall_prediction\data\processed\feature_engineered_data.csv"
+    cleaned_file = os.path.join(BASE_DIR, "data", "processed", "cleaned_data.csv")
+    output_file = os.path.join(BASE_DIR, "data", "processed", "feature_engineered_data.csv")
     
     if os.path.exists(cleaned_file):
         df = pd.read_csv(cleaned_file)
